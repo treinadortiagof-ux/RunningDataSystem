@@ -1,4 +1,4 @@
-# Running Data System (RDMS)
+# Running Data System (RDS)
 
 This project uses a **relational, bottom-up data model** to track athletic performance. The **Segments** file acts as the Single Source of Truth for all time and distance metrics.
 
