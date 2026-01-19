@@ -20,27 +20,28 @@ This project uses a **relational, bottom-up data model** to track athletic perfo
 | `dob` | Date | `1995-05-12` | Date of birth (YYYY-MM-DD). |
 | `weight_kg` | Float | `72.5` | Body weight for metrics. |
 
-### 2. `sessions.csv`
+### 2. `sessions.csv` Metadata of each session
 | Column | Type | Example | Description |
 | :--- | :--- | :--- | :--- |
-| `athlete_id` | String (FK) | `ATH_001` | Links to athletes file. |
+| `athlete_id` | String (FK) | `ATH_0001` | Links to athletes file. |
 | `session_id` | String (PK) | `20260120_01` | Unique ID (YYYYMMDD_NN). |
 | `date` | Date | `2026-01-20` | Date of the workout. |
 | `start_time` | Time | `17:30` | 24-hour format start time. |
-| `workout_type` | Enum | `tempo` | See Controlled Vocabulary. |
+| `workout_type` | Enum | `cc` | See Controlled Vocabulary. |
 | `rpe` | Integer | `7` | Rate of Perceived Exertion (1-10). |
+| `notes` | String | `20'cc + 6x800 + 1km` | Descrição do treino e notas |
 
-### 3. `segments.csv` (Source of Truth)
+### 3. `segments.csv` Detailed performance data
 | Column | Type | Example | Description |
 | :--- | :--- | :--- | :--- |
-| `athlete_id` | String (FK) | `ATH_001` | Links to athletes file. |
+| `athlete_id` | String (FK) | `ATH_0001` | Links to athletes file. |
 | `session_id` | String (FK) | `20260120_01` | Links to session file. |
 | `segment_number`| Integer | `1` | Chronological order in session. |
 | `segment_type` | Enum | `warmup run` | See Controlled Vocabulary. |
 | `distance_m` | Integer | `5000` | Distance in meters. |
 | `duration_sec` | Integer | `1200` | Duration in seconds. |
-| `avg_hr` | Integer | `165` | Nullable (leave blank if no data). |
-| `shoe_id` | String (FK) | `SHOE_01` | Links to shoes file. |
+| `avg_hr` | Integer | `165` | Average HR, Nullable (leave blank if no data). |
+| `shoe_id` | String (FK) | `METASPEED` | Links to shoes file. |
 
 ### 4. `drills.csv`
 | Column | Type | Example | Description |
@@ -64,6 +65,6 @@ This project uses a **relational, bottom-up data model** to track athletic perfo
 ---
 
 ## Controlled Vocabulary (Enums)
-* **`segment_type`**: `warmup run`, `work`, `recovery`, `drills`, `cooldown run`, `stretching`
-* **`workout_type`**: `easy`, `tempo`, `intervals`, `long`, `fartlek`, `race`
+* **`segment_type`**: `warmup run`, `warmup drills`, `work`, `recovery`, `sets`, `cooldown run`, `stretching`
+* **`workout_type`**: `continuous run`, `intervals`, `sets`, `race`
 * **`status`**: `active`, `retired`
